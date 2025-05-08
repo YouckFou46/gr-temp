@@ -1,0 +1,148 @@
+/* Standard CSS Reset */
+@font-face {
+    font-family: 'suiss';
+    src: url('SuisseIntl-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeSpeed;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+a {
+    text-decoration: underline;
+    color: inherit;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body{
+    /* background-color: #fff; */
+    background-color: #f00;
+    /* color: #000; */
+    color: #fff;
+    font-family: 'suiss', 'Times New Roman', Times;
+    font-size: 1.125rem;  
+    z-index: 1;
+}
+
+header {
+    position: relative;
+    height: 100vh;
+    padding: 1.25rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+    row-gap: 0;
+    z-index: 2;
+}
+
+#gr {
+    font-size: 110px;
+    grid-column: 1 / 4;
+}
+
+#year {
+    font-size: 110px;
+    grid-column: 6 / 13;
+    justify-self: end;
+}
+
+#introduction {
+    grid-row: 2;
+    grid-column: 1 / 13;
+    text-align: center;
+    align-self: center;
+}
+
+#description{
+    padding-top: 20px;
+    height: fit-content;
+    grid-column: 1 / 13;
+    grid-row: 3;
+    text-align: center;
+    align-self: end;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; 
+    z-index: 1;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 1rem;
+    }
+    header {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        padding-bottom: 0;
+    }
+    #gr {
+        grid-column: 1 / 5;
+        justify-self: center;
+        align-self: self-start;
+    }
+    #description {
+        align-self: center;
+    }
+    #year {
+        grid-column: 1 / 5;
+        justify-self: center;
+        align-self: end;
+    }
+    #trail-canvas {
+        display: none;
+    }
+}

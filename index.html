@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gianna Ricci</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" id="favicon">
+    <script>
+        function updateFaviconForTheme(e) {
+          const isDark = e.matches;
+          const favicon = document.getElementById('favicon');
+          favicon.href = isDark ? 'favicon.ico' : 'favicon-black.ico';
+        }
+        
+        const darkModeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+        updateFaviconForTheme(darkModeMedia);
+        
+        darkModeMedia.addEventListener('change', updateFaviconForTheme);
+        </script>        
+</head>
+<body>
+    <header>
+        <span id="gr" class="unselectable">GR</span>
+        <span id="year" class="unselectable">©2025</span>
+        <div id="introduction">
+            <span class="unselectable">Hi my name is Gianna. I'm a Visual Communications Designer.</span>
+            <br>
+            <a href="mailto:">ricci-gianna@web.de</a>
+        </div>
+        <span id="description" class="unselectable">This Portfolio will be updated soon.</span>
+    </header>
+    <canvas id="trail-canvas"></canvas>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('trail-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let particles = [];
+
+    document.addEventListener('mousemove', function(event) {
+        particles.push({
+            x: event.clientX,
+            y: event.clientY,
+            life: 200 
+        });
+    });
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
+
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            const alpha = p.life / 100;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 50, 0, Math.PI * 2);
+            ctx.fillStyle = `rgb(255, 0, 144)`;
+            ctx.shadowColor = 'rgb(255, 0, 144)';
+            // ctx.fillStyle = `#fff`;
+            // ctx.shadowColor = '#fff';
+            ctx.shadowBlur = 3 * alpha; 
+            ctx.fill();
+
+            p.life--; // Lebensdauer verkürzen
+        }
+
+        // Entferne tote Partikel
+        particles = particles.filter(p => p.life > 0);
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+});
+</script>
+</html> 
